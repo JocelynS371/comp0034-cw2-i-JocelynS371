@@ -11,3 +11,16 @@ To set up your project:
    or [the pip documentation](https://pip.pypa.io/en/latest/user_guide/#requirements-files).
 4. Edit .gitignore to add any config files and folders for your IDE. 
 
+
+# Note to self
+## ML algo
+data is temp and pres varying with time and space   
+train with uncleaned dataset
+input prediction? can you really predict time and space?
+output: trend prediction
+
+3 axis: time, space, temp/pressure
+how to create model
+
+
+
