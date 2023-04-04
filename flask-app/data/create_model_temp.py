@@ -2,13 +2,10 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from datetime import datetime
-from sklearn.linear_model import SGDRegressor
-from sklearn.preprocessing import PolynomialFeatures
+import pickle
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score
+from sklearn.metrics import r2_score,mean_absolute_error
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.metrics import mean_absolute_error
 
 # Load the data from the CSV file into a pandas DataFrame
 def read_df():
@@ -29,7 +26,6 @@ def read_df():
     return df
 
 data=read_df()
-print('start')
 # extract the features and target variable
 X = data[['Date', 'Longitude', 'Latitude']]
 y = data['Temperture']
@@ -37,30 +33,34 @@ y = data['Temperture']
 # split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# trial and error, n_estimator=440
+# trial and error, n_estimator=440, learning rate=0.5
 # for loop to optimise model
-n=np.arange(0,1.1,0.1)
-r_squared=[]
-abs_error=[]
-for learning_rate in n:
+#n=np.arange(0,1.1,0.1)
+#r_squared=[]
+#abs_error=[]
+#for learning_rate in n:
     # create the SGD regression model with default settings
-    model = GradientBoostingRegressor(n_estimators=440,learning_rate=n,max_depth=4,random_state=0)
+model = GradientBoostingRegressor(n_estimators=440,learning_rate=0.5,max_depth=4,random_state=0)
 
-    # fit the model with training data
-    model.fit(X_train, y_train)
+# fit the model with training data
+model.fit(X_train, y_train)
 
-    # make predictions with test data
-    y_pred = model.predict(X_test)
+# make predictions with test data
+y_pred = model.predict(X_test)
 
-    # calculate the R-squared score
-    print('learning_rate:',learning_rate)
-    r_squared.append(r2_score(y_test, y_pred))
-    abs_error.append(mean_absolute_error(y_test,y_pred))
-plt.figure(1)
-r_plot=plt.plot(n,r_squared)
-plt.title('r_square_values')
-plt.figure(2)
-e_plot=plt.plot(n,abs_error)
-plt.title('error_values')
-plt.show()
+# calculate the R-squared score
+
+r_squared=r2_score(y_test, y_pred)
+abs_error=mean_absolute_error(y_test,y_pred)
+print('r square:',r_squared)
+print('mean_absolute_error:',abs_error)
+filename = 'model_temp.sav'
+pickle.dump(model, open(filename, 'wb'))
+#plt.figure(1)
+#r_plot=plt.plot(n,r_squared)
+#plt.title('r_square_values')
+#plt.figure(2)
+#e_plot=plt.plot(n,abs_error)
+#plt.title('error_values')
+#plt.show()
 
