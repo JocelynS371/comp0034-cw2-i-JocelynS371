@@ -4,7 +4,8 @@ from wtforms.validators import DataRequired
 
 
 class PredictionForm(FlaskForm):
-    """Form fields to input the values required to predict iris variety"""
+    """Form fields to input the values required to predict temperture"""
 
-    sepal_length = DecimalField(validators=[DataRequired()])
+    Date = DecimalField(validators=[DataRequired()])
+    
     
