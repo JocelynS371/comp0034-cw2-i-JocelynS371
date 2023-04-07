@@ -2,7 +2,7 @@
 
 
 class Config(object):
-    pass
+    app.config["SECRET_KEY"] = "saULPgD9XU8vzLVk7kyLBw"
 
 
 class ProductionConfig(Config):
