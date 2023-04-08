@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Display Data Entry</title>
+  </head>
+  <body>
+    <h1>Display Data Entry</h1>
+    <form method="POST" action="{{ url_for('data_entry') }}">
+      <label for="entry_id">Enter Data Entry ID:</label>
+      <input type="text" id="entry_id" name="entry_id">
+      <button type="submit">Display</button>
+    </form>
+    {% if data_entry %}
+      <h2>Data Entry {{ data_entry.id }}</h2>
+      <p>Temperature: {{ data_entry.temperature }}</p>
+      <p>Salinity: {{ data_entry.salinity }}</p>
+      <p>Date: {{ data_entry.date }}</p>
+      <p>Longitude: {{ data_entry.longitude }}</p>
+      <p>Latitude: {{ data_entry.latitude }}</p>
+    {% endif %}
+  </body>
+</html>
