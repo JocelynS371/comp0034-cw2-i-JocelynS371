@@ -20,5 +20,8 @@ def read_df():
     return df
 
 data=read_df()
+
+db_file = Path(__file__).parent.joinpath("data.db")
+engine = create_engine("sqlite:///" + str(db_file), echo=False)
 # Write the data to a table in the sqlite database 
 iris.to_sql("data", engine, if_exists="append")
