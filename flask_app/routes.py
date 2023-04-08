@@ -10,6 +10,9 @@ def index():
 
 @app.route("/login")
 def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
     return render_template('login.html')
 
 
