@@ -4,6 +4,13 @@ from flask import render_template,request
 from . import db
 from .models import data,user
 from .forms import UserForm, LoginForm, PredictionForm
+from pathlib import Path
+import pickle
+from datetime import datetime
+
+model_file = Path('flask_app/data/model_temp.sav')
+with open(model_file, 'rb') as f:
+    model = pickle.load(f)
 
 @app.route("/")
 def index():
@@ -60,6 +67,18 @@ def data_entry():
     return render_template('data-entry.html')
 
 
-@app.route("/predict")
+@app.route("/predict", methods=['GET','POST'])
 def predict():
+    if request.method == 'POST':
+            date_str = datetime.strptime(request.form['date'],'%Y-%m-%d')
+            date = datetime.toordinal(date_str)
+            longitude = request.form['longitude']
+            latitude = request.form['latitude']
+
+            # perform prediction
+            prediction = model.predict([[date, longitude, latitude]])[0]
+
+            # render the prediction result in the same page
+            return render_template('predict.html', prediction=prediction)
+
     return render_template('predict.html')
