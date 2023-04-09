@@ -10,6 +10,12 @@ def index():
 
     return render_template('index.html')
 
+@app.route("/test371371")
+def test():
+    
+    """create a testing page for own use"""
+    list = db.session.execute(db.select(data).scalars())
+    return render_template('test.html',list=list)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

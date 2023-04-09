@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% set title = 'test list' %}
+{% block content %}
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+    </tr>
+    {% for data in list %}
+    <tr>
+        <td>{{data.entry_id}}</td>
+        <td>{{data.Date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
