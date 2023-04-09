@@ -1,20 +1,20 @@
-from flask_app import db
+from . import db
 
 
-class data(db.model):
+class data(db.Model):
 
     """ data entries"""
 
     __tablename__ = 'data'
-    entry_id = db.column(db.Interger, primary_key = True)
-    Temperture = db.column(db.Float(), nullable = False)
-    Salinity = db.column(db.Float(), nullable = False)
-    Density = db.column(db.Float(), nullable = False)
-    Pressure = db.column(db.Float(), nullable = False)
-    Date = db.column(db.Float(), nullable = False)
-    Longitude = db.column(db.Float(), nullable = False)
-    Latitude = db.column(db.Float(), nullable = False)
-    Depth = db.column(db.Float(), nullable = False)
+    entry_id = db.Column(db.Integer(), primary_key = True)
+    Temperture = db.Column(db.Float(), nullable = False)
+    Salinity = db.Column(db.Float(), nullable = False)
+    Density = db.Column(db.Float(), nullable = False)
+    Pressure = db.Column(db.Float(), nullable = False)
+    Date = db.Column(db.Float(), nullable = False)
+    Longitude = db.Column(db.Float(), nullable = False)
+    Latitude = db.Column(db.Float(), nullable = False)
+    Depth = db.Column(db.Float(), nullable = False)
 
     def __repr__(self):
         """
@@ -30,4 +30,4 @@ class user(db.Model):
     password = db.Column(db.Text(), nullable=False)
 
     def __repr__(self):
-    return '<User %r>' % self.username
+        return '<User %r>' % self.username

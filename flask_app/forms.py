@@ -1,12 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import DecimalField
+from wtforms import DecimalField, StringField
 from wtforms.validators import DataRequired
+
+class UserForm(FlaskForm):
+    """Form fields to input the values required to predict temperture"""
+
+    username = StringField('username', validators=[DataRequired()])
+    password = StringField('password', validators=[DataRequired()])
 
 class LoginForm(FlaskForm):
     """Form fields to input the values required to predict temperture"""
 
-    Username = DecimalField(validators=[DataRequired()])
-    Password = DecimalField(validators=[DataRequired()])
+    username = StringField('username', validators=[DataRequired()])
+    password = StringField('password', validators=[DataRequired()])
 
 
 

@@ -1,7 +1,9 @@
 from flask import current_app as app
 from flask_login import login_required, current_user
 from flask import render_template,request 
-
+from . import db
+from .models import data,user
+from .forms import UserForm
 
 @app.route("/")
 def index():
@@ -14,8 +16,21 @@ def index():
 def test():
     
     """create a testing page for own use"""
-    list = db.session.execute(db.select(data).scalars())
-    return render_template('test.html',list=list)
+    data_list = db.session.execute(db.select(data))
+    return render_template('test.html',data_list=data_list)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = UserForm()
+    if form.validate_on_submit():
+        username = request.form.get('username')
+        password = request.form.get('password')
+        new_user = user(username=username, password = password)
+        db.session.add(new_user)
+        db.session.commit()
+        text = f'Register Success, please remember your password {username}'
+        return text
+    return render_template('register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
