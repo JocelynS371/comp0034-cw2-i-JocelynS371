@@ -1,4 +1,7 @@
 
+{% extends 'layout.html' %}
+{% set title = 'Predict' %}
+{% block content %}
 <body>
 	<h1>Regression Model Prediction</h1>
 	<form method="post" action="{{ url_for('predict') }}">
@@ -15,3 +18,4 @@
 	</form>
 </body>
 </html>
+{% endblock %}

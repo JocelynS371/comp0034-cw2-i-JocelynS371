@@ -1,5 +1,4 @@
-<!-- from https://getbootstrap.com/docs/5.2/components/navbar/ -->
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-light" style="width: 30%;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Jocelyn Shao's coursework</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -7,15 +6,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                <a class="nav-link" href="{{ url_for('data_entry') }}">See data entries</a>
+                <a class="nav-link" href="{{ url_for('predict') }}">Predict a value</a>
+            </div>
         </div>
     </div>
 </nav>
