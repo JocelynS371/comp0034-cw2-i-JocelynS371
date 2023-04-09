@@ -13,7 +13,7 @@ def create_app():
     TESTING=True,
     SECRET_KEY='saULPgD9XU8vzLVk7kyLBw',
     SQLALCHEMY_DATABASE_URI="sqlite:///" + str(
-        PROJECT_ROOT.joinpath("data", "iris.db")),
+        PROJECT_ROOT.joinpath("data", "data.db")),
     SQLALCHEMY_TRACK_MODIFICATIONS = False,
     SQLALCHEMY_ECHO = True
 )

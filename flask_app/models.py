@@ -6,7 +6,7 @@ class data(db.Model):
     """ data entries"""
 
     __tablename__ = 'data'
-    entry_id = db.Column(db.Integer(), primary_key = True)
+    index = db.Column(db.Integer(), primary_key = True)
     Temperture = db.Column(db.Float(), nullable = False)
     Salinity = db.Column(db.Float(), nullable = False)
     Density = db.Column(db.Float(), nullable = False)
@@ -25,6 +25,7 @@ class data(db.Model):
         return f"Entry id {self.entry_id}: {datetime.fromordinal(int(self.Date))}, {self.Longitude}, {self.Latitude}, {self.Temperture}, {self.Salinity}>"
 
 class user(db.Model):
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text(), unique=True, nullable=False)
     password = db.Column(db.Text(), nullable=False)

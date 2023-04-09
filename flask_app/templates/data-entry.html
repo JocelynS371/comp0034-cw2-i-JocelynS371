@@ -14,12 +14,17 @@
       <button type="submit">Display</button>
     </form>
     {% if data_entry %}
-      <h2>Data id {{ data_entry.id }}</h2>
-      <p>Temperature: {{ data_entry.temperature }}</p>
-      <p>Salinity: {{ data_entry.salinity }}</p>
-      <p>Date: {{ data_entry.date }}</p>
-      <p>Longitude: {{ data_entry.longitude }}</p>
-      <p>Latitude: {{ data_entry.latitude }}</p>
+      <h2>Data id {{ data_entry.index }}</h2>
+      <p>Temperature: {{ data_entry.Temperture }}</p>
+      <p>Salinity: {{ data_entry.Salinity }}</p>
+      <p>Density: {{ data_entry.Density }}</p>
+      <p>Pressure: {{ data_entry.Pressure }}</p>
+      <p>Date: {{ data_entry.Date }}</p>
+      <p>Longitude: {{ data_entry.Longitude }}</p>
+      <p>Latitude: {{ data_entry.Latitude }}</p>
+      <p>Depth: {{ data_entry.Depth }}</p>
+    {% else %}
+    <h2>Invalid ID, Id out of range</h2>
     {% endif %}
   </body>
 </html>

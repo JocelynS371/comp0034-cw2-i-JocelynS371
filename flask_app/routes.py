@@ -21,10 +21,8 @@ def index():
 
 @app.route("/test371371")
 def test():
-    
-    """create a testing page for own use"""
-    data_list = db.session.execute(db.select(data))
-    return render_template('test.html',data_list=data_list)
+    data_entries = data.query.all()
+    return render_template('test.html', data_entries=data_entries)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -62,8 +60,12 @@ def store():
     return "placeholder"
 
 
-@app.route("/data-entry",methods=['GET','POST'])
+@app.route('/data-entry', methods=['GET', 'POST'])
 def data_entry():
+    if request.method == 'POST':
+        index = int(request.form['entry_id'])
+        data_entry = data.query.get(index)
+        return render_template('data-entry.html', data_entry=data_entry)
     return render_template('data-entry.html')
 
 

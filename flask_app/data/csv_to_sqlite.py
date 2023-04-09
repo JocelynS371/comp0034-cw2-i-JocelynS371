@@ -14,7 +14,7 @@ def read_df():
     'Potential_density_anomaly_kgm3':'Density',
     'Pressure_decibar':'Pressure',
     'Serial_date_number_base_date_1_January_0000':'Date',
-    'Bottom_Depth_m':'Bottom Depth'
+    'Bottom_Depth_m':'Depth'
     },inplace=True)
     #df['Date'] = [datetime.fromordinal(int(date)) for date in df['Date']]
     return df
