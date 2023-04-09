@@ -31,3 +31,8 @@ class user(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+    def check_credentials(username, password):
+        User = user.query.filter_by(username=username).first()
+        if User.password == password:
+            return True
+        else: return False

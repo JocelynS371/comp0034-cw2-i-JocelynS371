@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from flask import render_template,request 
 from . import db
 from .models import data,user
-from .forms import UserForm
+from .forms import UserForm, LoginForm, PredictionForm
 
 @app.route("/")
 def index():
@@ -34,10 +34,19 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    form = LoginForm()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-    return render_template('login.html')
+        if user.check_credentials(username,password):
+            return 'Logged in successfully!'
+        else:
+            error = 'Invalid username or password.'
+            return render_template('login.html', form=form, error=error)
+    return render_template('login.html', form=form)
+
+
+
 
 
 
