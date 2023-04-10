@@ -1,5 +1,5 @@
 import pytest
-from flask_app import create_app, config, data, user
+from .flask_app import create_app, config, data, user
 from selenium.webdriver.chrome.options import Options
 from dash.testing.application_runners import import_app
 
