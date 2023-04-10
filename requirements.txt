@@ -4,3 +4,6 @@ flask
 flask-sqlalchemy
 flask-wtf
 selenium
+dash
+pathlib
+pickle
