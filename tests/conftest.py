@@ -14,7 +14,7 @@ def app():
 
 
 @pytest.fixture(scope="function")
-def test_client():
+def test_client(app):
     """ Flask test client within an application context. """
     with app.test_client() as testing_client:
         with app.app_context():
