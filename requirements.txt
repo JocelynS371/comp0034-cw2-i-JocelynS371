@@ -9,4 +9,4 @@ selenium
 dash
 pathlib
 requests
-sklearn
+scikit-learn
