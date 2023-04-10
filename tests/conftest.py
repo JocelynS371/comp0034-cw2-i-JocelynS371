@@ -1,8 +1,8 @@
 import pytest
-from flask-app.models import data, user
-from flask-app.main import create_app
 from flask import current_app as app
-from flask-app.config import config
+from app.models import data, user
+from app.main import create_app
+from app.config import config
 from selenium.webdriver.chrome.options import Options
 from dash.testing.application_runners import import_app
 
