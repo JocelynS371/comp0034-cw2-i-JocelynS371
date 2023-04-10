@@ -6,3 +6,4 @@ flask-wtf
 selenium
 dash
 pathlib
+requests
