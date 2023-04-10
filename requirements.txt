@@ -7,4 +7,3 @@ selenium
 dash
 pathlib
 requests
-psutil
