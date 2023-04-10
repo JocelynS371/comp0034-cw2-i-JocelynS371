@@ -12,15 +12,11 @@ To set up your project:
 4. Edit .gitignore to add any config files and folders for your IDE. 
 
 
-# Note to self
-## ML algo
-data is temp and pres varying with time and space   
-train with uncleaned dataset
-input prediction? can you really predict time and space?
-output: trend prediction
+# Fixing error
+## Import error in testing
+I attempted to create fixtures, which required me to import certain class and functions from the app. I keep getting modul not found error. I have tried using differnt setup.py strctures, but to no avail. I also tried renaming the files. Didn't work.   
+I have checked the list of modules installed in my venv, flask_app is one of them. however, the conftest.py cannot seems to find the module. I have also tried importing only the py, but because they are interdependent, it did not work as well. 
 
-3 axis: time, space, temp/pressure
-how to create model
 
 
 
