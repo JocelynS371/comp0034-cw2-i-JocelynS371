@@ -17,6 +17,13 @@ To set up your project:
 I attempted to create fixtures, which required me to import certain class and functions from the app. I keep getting modul not found error. I have tried using differnt setup.py strctures, but to no avail. I also tried renaming the files. Didn't work.   
 I have checked the list of modules installed in my venv, flask_app is one of them. however, the conftest.py cannot seems to find the module. I have also tried importing only the py, but because they are interdependent, it did not work as well. 
 I figured it out at the end, I did not install the code in the git workflow. After some attempts, the import is now working.
+## Error in hook function pytest_setup_options()   
+When running in github action, the following error is returned.
+INTERNALERROR>     raise PluginValidationError(
+INTERNALERROR> pluggy._manager.PluginValidationError: unknown hook 'pytest_setup_options' in plugin <module 'conftest' from '/home/runner/work/comp0034-cw2-i-JocelynS371/comp0034-cw2-i-JocelynS371/tests/conftest.py'>
+After reading online and looking at documentation. THe error is not fixed and the hook function is editted out for now.
+
+
 
 
 
