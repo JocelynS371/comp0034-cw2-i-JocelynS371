@@ -2,6 +2,7 @@ pytest
 pandas
 openpyxl
 flask
+flask_login
 flask-sqlalchemy
 flask-wtf
 selenium
