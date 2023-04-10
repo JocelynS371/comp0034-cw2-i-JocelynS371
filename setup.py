@@ -1,5 +1,6 @@
 from setuptools import find_packages, setup
 
+
 setup(
     name='flask_app',
     version='1.0.0',
