@@ -16,6 +16,7 @@ To set up your project:
 ## Import error in testing
 I attempted to create fixtures, which required me to import certain class and functions from the app. I keep getting modul not found error. I have tried using differnt setup.py strctures, but to no avail. I also tried renaming the files. Didn't work.   
 I have checked the list of modules installed in my venv, flask_app is one of them. however, the conftest.py cannot seems to find the module. I have also tried importing only the py, but because they are interdependent, it did not work as well. 
+I figured it out at the end, I did not install the code in the git workflow. After some attempts, the import is now working.
 
 
 
