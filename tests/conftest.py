@@ -10,7 +10,7 @@ from dash.testing.application_runners import import_app
 @pytest.fixture(scope="session")
 def app():
     """Create a Flask app configured for testing"""
-    app = create_app(config.TestConfig)
+    app = create_app(Config.TestingConfig)
     yield app
 
 
