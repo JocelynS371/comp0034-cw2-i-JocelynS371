@@ -11,6 +11,7 @@ setup(
         'openpyxl',
         'flask',
         'flask-sqlalchemy',
+        'datetime',
         'flask-wtf'
     ],
 )
