@@ -7,19 +7,12 @@ PROJECT_ROOT = Path(__file__).parent
 db = SQLAlchemy()
 
 
-def create_app():
+def create_app(config_class):
 
     """Create and configure the Flask app"""
 
     app = Flask(__name__)
-    app.config.update(
-        TESTING=True,
-        SECRET_KEY='saULPgD9XU8vzLVk7kyLBw',
-        SQLALCHEMY_DATABASE_URI="sqlite:///" + str(
-            PROJECT_ROOT.joinpath("data", "data.db")),
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        SQLALCHEMY_ECHO=True
-        )
+    app.config.from_object(config_class)
     db.init_app(app)
     # Include the routes from routes.py
     with app.app_context():
