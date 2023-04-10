@@ -1,27 +1,25 @@
 # Import the necessary libraries
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score,mean_absolute_error
 from sklearn.ensemble import GradientBoostingRegressor
 
 # Load the data from the CSV file into a pandas DataFrame
-def read_df():
+def read_df(): 
 
     """return a renamed dataframe"""
 
-    data_path='flask-app\data\data_set_prepared.csv'
+    data_path = 'flask-app\data\data_set_prepared.csv'
     df = pd.read_csv(data_path)
-    df.rename(columns={
-    'Potential_temperature_C':'Temperture',
-    'Practical_salinity':'Salinity',
-    'Potential_density_anomaly_kgm3':'Density',
-    'Pressure_decibar':'Pressure',
-    'Serial_date_number_base_date_1_January_0000':'Date',
-    'Bottom_Depth_m':'Bottom Depth'
-    },inplace=True)
+    df.rename(columns = {
+        'Potential_temperature_C':'Temperture',
+        'Practical_salinity':'Salinity',
+        'Potential_density_anomaly_kgm3':'Density',
+        'Pressure_decibar':'Pressure',
+        'Serial_date_number_base_date_1_January_0000':'Date',
+        'Bottom_Depth_m':'Bottom Depth'
+        },inplace=True)
     #df['Date'] = [datetime.fromordinal(int(date)) for date in df['Date']]
     return df
 
