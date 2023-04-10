@@ -1,8 +1,8 @@
 import pytest
 from flask import current_app as app
-from app.models import data, user
-from app.main import create_app
-from app.config import config
+#from app.models import data, user
+#from app.main import create_app
+#from app.config import config
 from selenium.webdriver.chrome.options import Options
 from dash.testing.application_runners import import_app
 
@@ -22,10 +22,10 @@ def test_client():
             yield testing_client
 
 
-@pytest.fixture(scope='module')
-def new_user():
-    User = user('admin_test', 'admin_test')
-    return User
+#@pytest.fixture(scope='module')
+#def new_user():
+    #User = user('admin_test', 'admin_test')
+    #return User
 
 
 
