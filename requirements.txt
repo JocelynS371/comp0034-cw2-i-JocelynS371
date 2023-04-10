@@ -7,5 +7,4 @@ selenium
 dash
 pathlib
 requests
-dash.testing.application_runners
 psutil
