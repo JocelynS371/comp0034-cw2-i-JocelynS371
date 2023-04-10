@@ -1,6 +1,6 @@
 from flask import current_app as app
 from flask_login import login_required, current_user
-from flask import render_template,request 
+from flask import render_template,request, flash, redirect, url_for
 from . import db
 from .models import data,user
 from .forms import UserForm, LoginForm, PredictionForm
@@ -44,7 +44,8 @@ def login():
         username = request.form['username']
         password = request.form['password']
         if user.check_credentials(username,password):
-            return 'Logged in successfully!'
+            flash('Logged in successfully!')
+            return redirect(url_for('index'))
         else:
             error = 'Invalid username or password.'
             return render_template('login.html', form=form, error=error)
