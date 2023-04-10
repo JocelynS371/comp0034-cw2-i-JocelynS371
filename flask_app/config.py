@@ -5,7 +5,10 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent
 
 class Config(object):
-    SECRET_KEY = "saULPgD9XU8vzLVk7kyLBw"    
+    SECRET_KEY = "saULPgD9XU8vzLVk7kyLBw"
+    TESTING = False
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SQLALCHEMY_ECHO=True
 
 
 class ProductionConfig(Config):
@@ -15,8 +18,6 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI="sqlite:///" + str(
     PROJECT_ROOT.joinpath("data", "data.db"))
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
-    SQLALCHEMY_ECHO=True
 
 
 class TestingConfig(Config):
