@@ -12,7 +12,6 @@ class ProductionConfig(Config):
     pass
 
 
-
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI="sqlite:///" + str(
     PROJECT_ROOT.joinpath("data", "data.db"))
@@ -23,3 +22,4 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+
