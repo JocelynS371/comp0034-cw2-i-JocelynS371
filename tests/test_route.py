@@ -1,5 +1,5 @@
 import pytest
-from . import flask_app
+import flask_app
 
 
 def test_index(test_client):
