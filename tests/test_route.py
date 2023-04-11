@@ -37,8 +37,7 @@ def test_route_with_login(test_client,user, route, expected):
     WHEN an HTTP GET request is made by login user
     THEN all the status code should be 200"
     """
-    test_client.post("/register", data={"username": "dummy", "password": "dummy"})
-    test_client.post("/login", data={"username": "dummy", "password": "dummy"})
+    login_user(user)
     response = test_client.get(route)
     assert response.status_code == expected
 
