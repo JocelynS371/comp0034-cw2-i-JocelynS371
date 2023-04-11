@@ -21,12 +21,15 @@ def test_client(app):
             yield testing_client
 
 
-@pytest.fixture(scope="function")
-def user():
-    new_user = User(username='admin_test', password = 'admin_test')
-    db.session.add(new_user)
-    user = User.query.filter_by(username='admin_test').first()
-    return user
+def user(test_client):
+    with test_client.application.test_request_context():
+        new_user = User(username='admin_test', password='admin_test')
+        db.session.add(new_user)
+        db.session.commit()
+        user = User.query.filter_by(username='admin_test').first()
+        yield user
+        db.session.delete(user)
+        db.session.commit()
 
 
 @pytest.hookimpl(optionalhook=True) 
