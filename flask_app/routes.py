@@ -1,6 +1,6 @@
 from flask import current_app as app
 from flask_login import login_required, current_user, logout_user, login_user
-from flask import render_template,request, flash, redirect, url_for
+from flask import render_template,request, flash, redirect, url_for, jsonify
 from . import db
 from .models import Data,User
 from .forms import UserForm, LoginForm, PredictionForm
@@ -9,6 +9,7 @@ import pickle
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
+from dataclasses import asdict
 
 model_file = Path('flask_app/data/model_temp.sav')
 with open(model_file, 'rb') as f:
@@ -21,12 +22,10 @@ def index():
 
     return render_template('index.html')
 
-@app.route("/test371371")
-def test():
-    #data_entries = data.query.all()
-    #return render_template('test.html', data_entries=data_entries)
-    #return print(f'the attribute is {dir(User())}')
-    return dir(current_user)
+@app.route("/data-list")
+def data_list():
+    data_entries = Data.query.all()
+    return render_template('data-list.html', data_entries=data_entries)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -81,13 +80,23 @@ def store():
 
 
 @app.route('/data-entry', methods=['GET', 'POST'])
+@app.route('/data-entry/<index>', methods=['GET', 'POST'])
 @login_required
-def data_entry():
-    if request.method == 'POST':
-        index = int(request.form['entry_id'])
-        data_entry = Data.query.get(index)
-        return render_template('data-entry.html', data_entry=data_entry)
-    return render_template('data-entry.html')
+def data_entry(index=None):
+    try:
+        if index is not None:
+            data_entry = Data.query.get(index)
+            return render_template('data-entry.html', data_entry=data_entry)
+        elif index is None:
+            if request.method == 'POST':
+                index = int(request.form['entry_id'])
+                data_entry = Data.query.get(index)
+                return render_template('data-entry.html', data_entry=data_entry)
+        return render_template('data-entry.html')
+    except ValueError:
+        db.session.rollback()
+        flash('The index you entered is invalid, please enter a string')
+        return redirect(url_for('data_entry'))
 
 
 @app.route("/predict", methods=['GET','POST'])

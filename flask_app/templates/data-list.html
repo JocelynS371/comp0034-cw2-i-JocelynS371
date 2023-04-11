@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% set title = 'Data Entries' %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Entry ID</th>
+                <th>Date</th>
+                <th>Temperature</th>
+                <th>Salinity</th>
+                <th>Density</th>
+                <th>Pressure</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+                <th>Depth</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in data_entries %}
+                <tr>
+                    <td style="text-align:center">{{ entry.index }}</td>
+                    <td style="text-align:center">{{ entry.Date }}</td>
+                    <td style="text-align:center">{{ entry.Temperture }}</td>
+                    <td style="text-align:center">{{ entry.Salinity }}</td>
+                    <td style="text-align:center">{{ entry.Density }}</td>
+                    <td style="text-align:center">{{ entry.Pressure }}</td>
+                    <td style="text-align:center">{{ entry.Longitude }}</td>
+                    <td style="text-align:center">{{ entry.Latitude }}</td>
+                    <td style="text-align:center">{{ entry.Depth }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

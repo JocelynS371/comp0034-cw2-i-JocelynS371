@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light" style="width: 30%;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Jocelyn Shao's coursework</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -7,11 +7,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
                 {% if current_user.is_authenticated %}
-                <a class="nav-link" href="{{ url_for('data_entry') }}">See data entries</a>
+                <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('data_list') }}">Data List</a>
+                <a class="nav-link" href="{{ url_for('data_entry') }}">Lookup an data entry</a>
                 <a class="nav-link" href="{{ url_for('predict') }}">Predict a value</a>
-                <a class="nav-link" href="{{ url_for('logout') }}">Hi, {{ current_user.username }} (Logoff)</a>
+                <form class="d-flex" action="{{ url_for('logout') }}">
+                    <button class="btn btn-outline-danger me-2" type="submit">Hi, {{ current_user.username }} (Logoff)</button>
+                </form>
                 {% else %}
                 <a class="nav-link" href="{{ url_for('login') }}">Login</a>
                 <a class="nav-link" href="{{ url_for('register') }}">Register</a>
@@ -20,3 +23,5 @@
         </div>
     </div>
 </nav>
+
+

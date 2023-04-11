@@ -10,3 +10,4 @@ dash
 pathlib
 requests
 scikit-learn
+dataclass
