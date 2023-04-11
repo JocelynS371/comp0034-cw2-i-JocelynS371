@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import DecimalField, StringField, FloatField, PasswordField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, EqualTo
 
 class UserForm(FlaskForm):
     """Form fields to input the values required to predict temperture"""
 
     username = StringField('username', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
+    password_verif = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
 
 class LoginForm(FlaskForm):
     """Form fields to input the values required to predict temperture"""

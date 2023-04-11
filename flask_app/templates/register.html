@@ -25,6 +25,17 @@
             {% endfor %}
         </ul>
         {% endif %}
+        <div class="form-group">
+            {{ form.password_verif.label }}
+            {{ form.password_verif(class="form-control") }}
+            {% if form.password_verif.errors %}
+            <ul class="text-warning">
+                {% for error in form.password_verif.errors %}
+                <li>The passwords does not match</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
     </div>
     <input type="submit" value="Register">
 </form>

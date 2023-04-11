@@ -9,11 +9,18 @@ import pickle
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
-from dataclasses import asdict
 
-model_file = Path('flask_app/data/model_temp.sav')
-with open(model_file, 'rb') as f:
-    model = pickle.load(f)
+
+model_temp_file = Path('flask_app/data/model_temp.sav')
+model_salinity_file = Path('flask_app/data/model_salinity.sav')
+
+# load the temperature model
+with open(model_temp_file, 'rb') as f:
+    model_temp = pickle.load(f)
+
+# load the salinity model
+with open(model_salinity_file, 'rb') as f:
+    model_salinity = pickle.load(f)
 
 @app.route("/")
 def index():
@@ -107,11 +114,12 @@ def predict():
             date = datetime.toordinal(date_str)
             longitude = request.form['longitude']
             latitude = request.form['latitude']
-
+            entry=[request.form['date'],longitude,latitude]
             # perform prediction
-            prediction = model.predict([[date, longitude, latitude]])[0]
-
+            prediction={}
+            prediction['Temperature'] = model_temp.predict([[date, longitude, latitude]])[0]
+            prediction['Salinity'] = model_salinity.predict([[date, longitude, latitude]])[0]
             # render the prediction result in the same page
-            return render_template('predict.html', prediction=prediction)
+            return render_template('predict.html', check=entry, prediction=prediction)
 
     return render_template('predict.html')

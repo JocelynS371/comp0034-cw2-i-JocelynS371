@@ -14,10 +14,22 @@
         <br>
         <button type="submit">Predict</button>
     </form>
+
+{% if check %}
+    <h2>The Values you entered were</h2>
+    <h3>{{check}}</h3>
+{% endif %}
+
+{% if prediction %}
     {% if prediction is not none %}
-    <h2>Prediction: {{ prediction }}</h2>
-	{% else %}
-	<h2>Invalid Input</h2>
+        {% for key, value in prediction.items() %}
+            <h2>Predicted {{ key }} is : {{ value }}</h2>
+        {% endfor %}
+    {% else %}
+    <h2>Invalid Input, please try again</h2>
     {% endif %}
+{% endif %}
+
 {% endblock %}
+
 

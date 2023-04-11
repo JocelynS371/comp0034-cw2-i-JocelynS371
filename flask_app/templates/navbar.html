@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Jocelyn Shao's coursework</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style = "background-color:gray">
+    <div class="container-fluid"> 
+        <a class="navbar-brand"  href="#">Jocelyn Shao's coursework</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,9 +9,9 @@
             <div class="navbar-nav ms-auto mb-2 mb-lg-0">
                 {% if current_user.is_authenticated %}
                 <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
-                <a class="nav-link" href="{{ url_for('data_list') }}">Data List</a>
-                <a class="nav-link" href="{{ url_for('data_entry') }}">Lookup an data entry</a>
-                <a class="nav-link" href="{{ url_for('predict') }}">Predict a value</a>
+                <a class="nav-link dropdown-toggle" href="{{ url_for('data_list') }}">Data List</a>
+                <a class="nav-link dropdown-toggle" href="{{ url_for('data_entry') }}">Lookup an data entry</a>
+                <a class="nav-link dropdown-toggle" href="{{ url_for('predict') }}">Predict a value</a>
                 <form class="d-flex" action="{{ url_for('logout') }}">
                     <button class="btn btn-outline-danger me-2" type="submit">Hi, {{ current_user.username }} (Logoff)</button>
                 </form>
