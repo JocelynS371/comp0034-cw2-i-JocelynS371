@@ -1,6 +1,6 @@
 from . import db
 import datetime
-
+from flask_login import UserMixin
 
 class data(db.Model):
 
@@ -25,7 +25,7 @@ class data(db.Model):
         clsname = self.__class__.__name__
         return f"Entry id {self.entry_id}: {datetime.fromordinal(int(self.Date))}, {self.Longitude}, {self.Latitude}, {self.Temperture}, {self.Salinity}>"
 
-class user(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text(), unique=True, nullable=False)

@@ -2,10 +2,12 @@ from pathlib import Path
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_app.config import Config, ProductionConfig, DevelopmentConfig, TestingConfig
+from flask_login import LoginManager
 
 
 PROJECT_ROOT = Path(__file__).parent
 db = SQLAlchemy()
+login_manager = LoginManager()
 
 # config is not working with the terminal for unknown reason
 # if app is to be opened in terminal, 
@@ -18,6 +20,7 @@ def create_app(config_class):
     app.config.from_object(config_class)
     #app.config.from_object(DevelopmentConfig)
     db.init_app(app)
+    login_manager.init_app(app)
     with app.app_context():
         from . import routes
         from .models import data, user

@@ -14,4 +14,3 @@ def test_route_get(test_client, route):
     response = test_client.get(route)
     assert response.status_code == 200
 
-
