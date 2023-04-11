@@ -25,7 +25,7 @@ class Data(db.Model):
         clsname = self.__class__.__name__
         return f"Entry id {self.entry_id}: {datetime.fromordinal(int(self.Date))}, {self.Longitude}, {self.Latitude}, {self.Temperture}, {self.Salinity}>"
 
-class User(db.Model, UserMixin):
+class User(UserMixin,db.Model):
     __tablename__ = 'User'
     user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text(), unique=True, nullable=False)
@@ -42,4 +42,4 @@ class User(db.Model, UserMixin):
         return str(self.user_id)
     @login_manager.user_loader
     def load_user(user_id):
-        return User.user_id
+        return User.query.filter(user_id == user_id).first()

@@ -21,8 +21,10 @@ def index():
 
 @app.route("/test371371")
 def test():
-    data_entries = data.query.all()
-    return render_template('test.html', data_entries=data_entries)
+    #data_entries = data.query.all()
+    #return render_template('test.html', data_entries=data_entries)
+    #return print(f'the attribute is {dir(User())}')
+    return dir(current_user)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -39,6 +41,9 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        flash('You are logged in already')
+        return redirect(url_for('index'))
     form = LoginForm()
     if request.method == 'POST':
         username = request.form['username']
@@ -62,11 +67,13 @@ def logout():
 
 
 @app.route("/store")
+@login_required
 def store():
     return "placeholder"
 
 
 @app.route('/data-entry', methods=['GET', 'POST'])
+@login_required
 def data_entry():
     if request.method == 'POST':
         index = int(request.form['entry_id'])
@@ -76,6 +83,7 @@ def data_entry():
 
 
 @app.route("/predict", methods=['GET','POST'])
+@login_required
 def predict():
     if request.method == 'POST':
             date_str = datetime.strptime(request.form['date'],'%Y-%m-%d')
