@@ -21,7 +21,10 @@ I figured it out at the end, I did not install the code in the git workflow. Aft
 When running in github action, the following error is returned.
 INTERNALERROR>     raise PluginValidationError(
 INTERNALERROR> pluggy._manager.PluginValidationError: unknown hook 'pytest_setup_options' in plugin <module 'conftest' from '/home/runner/work/comp0034-cw2-i-JocelynS371/comp0034-cw2-i-JocelynS371/tests/conftest.py'>
-After reading online and looking at documentation. THe error is not fixed and the hook function is editted out for now.
+After reading online and looking at documentation. THe error is not fixed and the hook function is editted out for a while.
+After consulting a friend familar with pytest and selenium, attempted to add a line   
+@pytest.hookimpl(optionalhook=True)   
+
 ## Error with config
 There is a slight error with the config. While it is fine in cintinous intergration, when the command
 python -m flask --app 'flask_app:create_app("config.DevelopmentConfig")' --debug run   
