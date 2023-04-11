@@ -20,6 +20,8 @@ def test_client(app):
         with app.app_context():
             yield testing_client
 
+
+@pytest.fixture(scope="function")
 def user(app):
     with app.app_context():
         with app.test_request_context():
@@ -30,7 +32,6 @@ def user(app):
             yield user
             db.session.delete(user)
             db.session.commit()
-
 
 
 @pytest.hookimpl(optionalhook=True) 
