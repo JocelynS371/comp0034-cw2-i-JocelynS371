@@ -1,8 +1,8 @@
 from flask import current_app as app
-from flask_login import login_required, current_user, logout_user
+from flask_login import login_required, current_user, logout_user, login_user
 from flask import render_template,request, flash, redirect, url_for
 from . import db
-from .models import data,user
+from .models import Data,User
 from .forms import UserForm, LoginForm, PredictionForm
 from pathlib import Path
 import pickle
@@ -30,7 +30,7 @@ def register():
     if form.validate_on_submit():
         username = request.form.get('username')
         password = request.form.get('password')
-        new_user = user(username=username, password = password)
+        new_user = User(username=username, password = password)
         db.session.add(new_user)
         db.session.commit()
         text = f'Register Success, please remember your password {username}'
@@ -43,16 +43,18 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if user.check_credentials(username,password):
+        user=User.check_credentials(username,password)
+        if user is not None:
             flash('Logged in successfully!')
+            login_user(user)
             return redirect(url_for('index'))
-        else:
+        elif user is None:
             error = 'Invalid username or password.'
             return render_template('login.html', form=form, error=error)
     return render_template('login.html', form=form)
 
 
-@app.route("/logout")
+@app.route("/logout", methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()

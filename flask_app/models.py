@@ -1,12 +1,12 @@
-from . import db
+from . import db, login_manager
 import datetime
 from flask_login import UserMixin
 
-class data(db.Model):
+class Data(db.Model):
 
     """ data entries"""
 
-    __tablename__ = 'data'
+    __tablename__ = 'Data'
     index = db.Column(db.Integer(), primary_key = True)
     Temperture = db.Column(db.Float(), nullable = False)
     Salinity = db.Column(db.Float(), nullable = False)
@@ -26,15 +26,20 @@ class data(db.Model):
         return f"Entry id {self.entry_id}: {datetime.fromordinal(int(self.Date))}, {self.Longitude}, {self.Latitude}, {self.Temperture}, {self.Salinity}>"
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'user'
-    id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'User'
+    user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text(), unique=True, nullable=False)
     password = db.Column(db.Text(), nullable=False)
 
     def __repr__(self):
         return '<User %r>' % self.username
     def check_credentials(username, password):
-        User = user.query.filter_by(username=username).first()
-        if User.password == password:
-            return True
-        else: return False
+        user = User.query.filter_by(username=username).first()
+        if user and user.password == password:
+            return user
+        else: return None
+    def get_id(self):
+        return str(self.user_id)
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.user_id

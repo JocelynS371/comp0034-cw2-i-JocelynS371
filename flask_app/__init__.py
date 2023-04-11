@@ -23,7 +23,7 @@ def create_app(config_class):
     login_manager.init_app(app)
     with app.app_context():
         from . import routes
-        from .models import data, user
+        from .models import Data, User
         db.create_all()
 
     return app
