@@ -20,7 +20,7 @@ def test_client(app):
         with app.app_context():
             yield testing_client
 
-
+@pytest.fixture(scope="function")
 def user(test_client):
     with test_client.application.test_request_context():
         new_user = User(username='admin_test', password='admin_test')
