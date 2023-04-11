@@ -1,6 +1,6 @@
 import pytest
 from flask import current_app as app
-from flask_app.models import data, user
+from flask_app.models import Data, User
 from flask_app import create_app
 from flask_app.config import Config, ProductionConfig, DevelopmentConfig, TestingConfig
 from selenium.webdriver.chrome.options import Options
@@ -23,8 +23,8 @@ def test_client(app):
 
 @pytest.fixture(scope='module')
 def new_user():
-    User = user('admin_test', 'admin_test')
-    return User
+    user = User('admin_test', 'admin_test')
+    return user
 
 
 @pytest.hookimpl(optionalhook=True) 
