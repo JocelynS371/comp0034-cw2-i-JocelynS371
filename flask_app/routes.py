@@ -77,7 +77,7 @@ def store():
 def data_entry():
     if request.method == 'POST':
         index = int(request.form['entry_id'])
-        data_entry = data.query.get(index)
+        data_entry = Data.query.get(index)
         return render_template('data-entry.html', data_entry=data_entry)
     return render_template('data-entry.html')
 
