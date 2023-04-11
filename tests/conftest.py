@@ -21,7 +21,7 @@ def test_client(app):
             yield testing_client
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="function")
 def user():
     user = User('admin_test', 'admin_test')
     return user
