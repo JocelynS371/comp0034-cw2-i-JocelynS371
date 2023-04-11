@@ -22,6 +22,12 @@ When running in github action, the following error is returned.
 INTERNALERROR>     raise PluginValidationError(
 INTERNALERROR> pluggy._manager.PluginValidationError: unknown hook 'pytest_setup_options' in plugin <module 'conftest' from '/home/runner/work/comp0034-cw2-i-JocelynS371/comp0034-cw2-i-JocelynS371/tests/conftest.py'>
 After reading online and looking at documentation. THe error is not fixed and the hook function is editted out for now.
+## Error with config
+There is a slight error with the config. While it is fine in cintinous intergration, when the command
+python -m flask --app 'flask_app:create_app("config.DevelopmentConfig")' --debug run   
+is entered into the terminal, the following error is returned
+Error: Failed to parse arguments as literal values: 'create_app(config.DevelopmentConfig)'.   
+The error cannot seems to be fixed by changing variable names, therefore a workaround is used, where when the app is ran in the terminal, 2 lines of code need to be swapped in __init__. See comment in __init__.
 
 
 
