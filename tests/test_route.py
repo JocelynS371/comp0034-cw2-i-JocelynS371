@@ -31,7 +31,7 @@ def test_route_without_login(test_client, route, expected):
     ('/data-entry', 200),
     ('/predict', 200)
     ])
-def test_route_with_login(test_client,user, route):
+def test_route_with_login(test_client,user, route, expected):
     """
     GIVEN a running Flask app
     WHEN an HTTP GET request is made by login user
