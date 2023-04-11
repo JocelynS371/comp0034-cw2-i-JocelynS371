@@ -25,7 +25,7 @@ def test_client(app):
 def user(app, test_client):
     with app.app_context():
         with app.test_request_context():
-            test_client.POST('/register', data=dict(username='dummy', password='dummy'))
+            test_client.post('/register', data=dict(username='dummy', password='dummy'))
             user = User.query.filter_by(username='dummy').first()
             yield user
             db.session.delete(user)
