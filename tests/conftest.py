@@ -23,9 +23,9 @@ def test_client(app):
 
 @pytest.fixture(scope="function")
 def user():
-    new_user = User(username=admin_test, password = admin_test)
+    new_user = User(username='admin_test', password = 'admin_test')
     db.session.add(new_user)
-    user = User.query.filter_by(username=admin_test).first()
+    user = User.query.filter_by(username='admin_test').first()
     return user
 
 
