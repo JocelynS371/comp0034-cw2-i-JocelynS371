@@ -7,6 +7,8 @@ from .forms import UserForm, LoginForm, PredictionForm
 from pathlib import Path
 import pickle
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import exc
 
 model_file = Path('flask_app/data/model_temp.sav')
 with open(model_file, 'rb') as f:
@@ -28,16 +30,22 @@ def test():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = UserForm()
-    if form.validate_on_submit():
-        username = request.form.get('username')
-        password = request.form.get('password')
-        new_user = User(username=username, password = password)
-        db.session.add(new_user)
-        db.session.commit()
-        text = f'Register Success, please remember your password {username}'
-        return text
-    return render_template('register.html', form=form)
+    try:
+        form = UserForm()
+        if form.validate_on_submit():
+            username = request.form.get('username')
+            password = request.form.get('password')
+            new_user = User(username=username, password = password)
+            db.session.add(new_user)
+            db.session.commit()
+            text = f'Register Success, please remember your password {username}'
+            flash(text)
+            return redirect(url_for('index'))
+        return render_template('register.html', form=form)
+    except exc.IntegrityError:
+        db.session.rollback()
+        flash(f'The username {username} has been taken')
+        return redirect(url_for('register'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
