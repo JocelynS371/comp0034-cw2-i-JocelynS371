@@ -22,7 +22,7 @@ def test_client(app):
 
 
 @pytest.fixture(scope='module')
-def new_user():
+def user():
     user = User('admin_test', 'admin_test')
     return user
 
