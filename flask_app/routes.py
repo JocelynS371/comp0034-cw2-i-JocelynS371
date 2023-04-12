@@ -92,7 +92,7 @@ def logout():
 def store():
     return "placeholder"
 
-@app.route('/data-entry/', methods=['GET', 'POST'])
+@app.route('/data-entry', methods=['GET', 'POST'])
 @app.route('/data-entry/<column>', methods=['GET', 'POST'])
 @login_required
 def data_entry(column=None):
