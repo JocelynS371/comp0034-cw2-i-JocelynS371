@@ -38,6 +38,7 @@ import pytest
 def test_route_with_login(app, test_client, route, expected):
     """
     GIVEN a running Flask app
+    WHEN the user registered and logged in
     WHEN an HTTP GET request is made by login user
     THEN all the status code should be 200"
     """
