@@ -7,6 +7,7 @@ from flask_login import login_user
     ('/login', 200), 
     ('/register', 200), 
     ('/logout', 401),
+    ('/data-list', 401),
     ('/data-entry', 401),
     ('/predict', 401)
     ])
@@ -29,7 +30,8 @@ import pytest
     ('/', 200),
     ('/login', 200), 
     ('/register', 200),
-    ('/logout', 200), 
+    ('/logout', 200),
+    ('/data-list', 200), 
     ('/data-entry', 200),
     ('/predict', 200)
     ])
@@ -39,7 +41,7 @@ def test_route_with_login(app, test_client, route, expected):
     WHEN an HTTP GET request is made by login user
     THEN all the status code should be 200"
     """
-    with app.app_context()():
+    with app.app_context():
         test_client.post('/register', data=dict(username='dummy', password='dummy'))
         test_client.post('/login', data=dict(username='dummy', password='dummy'))
         response = test_client.get(route)
