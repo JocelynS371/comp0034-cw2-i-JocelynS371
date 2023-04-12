@@ -1,0 +1,13 @@
+{% extends 'error.html' %}
+{% set title = '401 unauthrized' %}
+{% block content %}
+
+<div class="container">
+    <h2> You're not supposed to be here!</h2>
+    <p> You don't have access the this page!</p>
+    <p> If you have an account, please <a href="{{ url_for('login') }}">login here</a></p>
+    <p> If you don't, you can <a href="{{ url_for('register') }}">register here</a></p>
+  </div>
+
+
+  {% endblock %}
