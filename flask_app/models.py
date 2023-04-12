@@ -1,5 +1,5 @@
 from . import db, login_manager
-import datetime
+from datetime import datetime
 from flask_login import UserMixin
 
 class Data(db.Model):
@@ -24,6 +24,7 @@ class Data(db.Model):
         """
         clsname = self.__class__.__name__
         return f"Entry id {self.entry_id}: {datetime.fromordinal(int(self.Date))}, {self.Longitude}, {self.Latitude}, {self.Temperture}, {self.Salinity}>"
+    
 
 class User(UserMixin,db.Model):
     __tablename__ = 'User'

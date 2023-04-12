@@ -1,8 +1,47 @@
 {% extends 'layout.html' %}
-{% set title = 'Iris Home' %}
+{% set title = 'Login' %}
 {% block content %}
 
-<p>Hello, World!</p>
-<p>{{ prediction_text }}</p>
+<div class="container">
+    <h1>What are these data about?</h1>
+    <h2>Background information on DSO</h2>
+    <p>
+        The Denmark Strait Overflow (DSO) is an important source of dense water input 
+        to the deep limb of the Atlantic Meridional Overturning Circulation (AMOC).
+        It is fed by separate currents from the north that advect dense water masses 
+        formed in the Nordic Seas and Arctic Ocean which then converge at Denmark Strait
+    </p>
+    <h2>When and where were these data collected?</h2>
+    <p>
+        Salinity and temperature data recorded near bottom (20m height from seabed) 
+        between 1998 and 2015 by Seabird-Electronics-37 SM MicroCAT instruments. 
+        The data were calibrated and aggregated from those published with the following publications: 
+        Opher (2021) and Opher et al (accepted). 
+        This is a subset of data collected the Angmagssalik Denmark Strait Overflow Array 
+        that was in place between 1986 and 2015.
+    </p>
+    <h3>See more information at:</h3>
+    <a href="https://data.cefas.co.uk/view/21394">
+        Salinity and Temperature data from the Angmagssalik Array 
+        in the Denmark Strait Overflow - 1998 to 2015</a>
 
-{% endblock %}
+    <h1>What can I do with this app?</h1>
+    <p>
+        Good question, if this is the first time you are using this app,
+        you should see only the login and register option in the Navbar.
+        Choose a username and password and finish registering in 2 minute,
+        then you will have the option to:
+        1. See the list of all the data
+        2. Search the database for a range of data
+        3. Use our prediction model to predict a temperture and salinity at any time or place
+    </p>
+    <h2>Note</h2>
+    <p>
+        The prediction model is mostly for fun at the moment.
+        The r-squared value of the temperature prediction is 
+    </p>
+  </div>
+
+
+  {% endblock %}
+  

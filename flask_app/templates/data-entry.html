@@ -1,29 +1,70 @@
 {% extends 'layout.html' %}
-{% set title = 'Login' %}
+{% set title = 'Data Entry' %}
+
 {% block content %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Display Data Entry</title>
-  </head>
-  <body>
-    <h1>Display Data Entry</h1>
-    <form method="POST" action="{{ url_for('data_entry') }}">
-      <label for="entry_id">Enter Data Entry ID:</label>
-      <input type="text" id="entry_id" name="entry_id">
-      <button type="submit">Display</button>
-    </form>
-    {% if data_entry %}
-      <h2>Data id {{ data_entry.index }}</h2>
-      <p>Temperature: {{ data_entry.Temperture }}</p>
-      <p>Salinity: {{ data_entry.Salinity }}</p>
-      <p>Density: {{ data_entry.Density }}</p>
-      <p>Pressure: {{ data_entry.Pressure }}</p>
-      <p>Date: {{ data_entry.Date }}</p>
-      <p>Longitude: {{ data_entry.Longitude }}</p>
-      <p>Latitude: {{ data_entry.Latitude }}</p>
-      <p>Depth: {{ data_entry.Depth }}</p>
+  {% if column %}
+    {% if column == 'Date' %}
+      <h1>Show data entries by {{ column }}</h1>
+      <form method="POST">
+        <label for="start">Enter start date:</label>
+        <input type="date" id="start" name="start">
+        <label for="end">Enter end date:</label>
+        <input type="date" id="end" name="end">
+        <button type="submit">Filter</button>
+      </form>
+    {% else %}
+      <h1>Show data entries by {{ column }}</h1>
+      <form method="POST">
+        <label for="start">Enter start value:</label>
+        <input type="text" id="start" name="start">
+        <label for="end">Enter end value:</label>
+        <input type="text" id="end" name="end">
+        <button type="submit">Filter</button>
+      </form>
     {% endif %}
-  </body>
-</html>
+    {% if data_entries %}
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:center">Index</th>
+            <th style="text-align:center">Date</th>
+            <th style="text-align:center">Temperature</th>
+            <th style="text-align:center">Salinity</th>
+            <th style="text-align:center">Density</th>
+            <th style="text-align:center">Pressure</th>
+            <th style="text-align:center">Longitude</th>
+            <th style="text-align:center">Latitude</th>
+            <th style="text-align:center">Depth</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data_entry in data_entries %}
+            <tr>
+              <td style="text-align:center"> {{ data_entry.index }}</td>
+              <td style="text-align:center"> {{ date_to_str(data_entry.Date) }}</td>
+              <td style="text-align:center"> {{ data_entry.Temperture }}</td>
+              <td style="text-align:center"> {{ data_entry.Salinity }}</td>
+              <td style="text-align:center"> {{ data_entry.Density }}</td>
+              <td style="text-align:center"> {{ data_entry.Pressure }}</td>
+              <td style="text-align:center"> {{ data_entry.Longitude }}</td>
+              <td style="text-align:center"> {{ data_entry.Latitude }}</td>
+              <td style="text-align:center"> {{ data_entry.Depth }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  {% else %}
+    {% if columns %}
+      <p>Available columns:</p>
+      <ul>
+        {% for column in columns %}
+          <li><a href="{{ url_for('data_entry', column=column) }}">{{ column }}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No columns available</p>
+    {% endif %}
+  {% endif %}
 {% endblock %}
+

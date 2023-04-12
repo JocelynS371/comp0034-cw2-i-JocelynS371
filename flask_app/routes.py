@@ -3,6 +3,7 @@ from flask_login import login_required, current_user, logout_user, login_user
 from flask import render_template,request, flash, redirect, url_for, jsonify
 from . import db
 from .models import Data,User
+from .functions import date_to_float, date_to_str
 from .forms import UserForm, LoginForm, PredictionForm
 from pathlib import Path
 import pickle
@@ -22,6 +23,7 @@ with open(model_temp_file, 'rb') as f:
 with open(model_salinity_file, 'rb') as f:
     model_salinity = pickle.load(f)
 
+
 @app.route("/")
 def index():
     
@@ -32,7 +34,7 @@ def index():
 @app.route("/data-list")
 def data_list():
     data_entries = Data.query.all()
-    return render_template('data-list.html', data_entries=data_entries)
+    return render_template('data-list.html', data_entries=data_entries, date_to_str=date_to_str)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -85,33 +87,39 @@ def logout():
 def store():
     return "placeholder"
 
-
-@app.route('/data-entry', methods=['GET', 'POST'])
-@app.route('/data-entry/<index>', methods=['GET', 'POST'])
+@app.route('/data-entry/', methods=['GET', 'POST'])
+@app.route('/data-entry/<column>', methods=['GET', 'POST'])
 @login_required
 def data_entry(column=None):
     try:
-        if index is not None:
-            data_entry = Data.query.get(index)
-            return render_template('data-entry.html', data_entry=data_entry)
-        elif index is None:
+        if column is None:
+            columns = Data.__table__.columns.keys()
+            return render_template('data-entry.html', columns=columns)
+        else:
+            if column not in Data.__table__.columns.keys():
+                flash('Invalid column name')
+                return redirect(url_for('data_entry'))
             if request.method == 'POST':
-                index = int(request.form['entry_id'])
-                data_entry = Data.query.get(index)
-                return render_template('data-entry.html', data_entry=data_entry)
-        return render_template('data-entry.html')
+                start = request.form.get('start', 0)
+                end = request.form.get('end', 0)
+                if start > end:
+                    flash('Invalid range')
+                    return redirect(url_for('data_entry', column=column))
+                elif column == 'Date' :
+                    start = date_to_float(start)
+                    end = date_to_float(end)
+                data_entries = Data.query.filter(getattr(Data, column).between(start, end)).all()
+                return render_template('data-entry.html', data_entries=data_entries, column=column, date_to_str=date_to_str)
+            return render_template('data-entry.html', column=column)
     except ValueError:
-        db.session.rollback()
-        flash('The index you entered is invalid, please enter a string')
-        return redirect(url_for('data_entry'))
+        return flash('The values you entered were invalid, please try again')
 
 
 @app.route("/predict", methods=['GET','POST'])
 @login_required
 def predict():
     if request.method == 'POST':
-            date_str = datetime.strptime(request.form['date'],'%Y-%m-%d')
-            date = datetime.toordinal(date_str)
+            date = date_to_float(request.form['date'])
             longitude = request.form['longitude']
             latitude = request.form['latitude']
             entry=[request.form['date'],longitude,latitude]
