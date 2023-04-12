@@ -10,7 +10,7 @@ from flask_login import login_user
     ('abcdefg', 'test', 'test', b'success')
     ('ADCDEFG', 'test', 'test', b'taken')
 ])
-def test_error_register(test_client, username, password, password_verif, expected) :
+def test_error_register(app, test_client, username, password, password_verif, expected) :
 
     """ GIVEN register is functional
         WHEN username is not unique 
