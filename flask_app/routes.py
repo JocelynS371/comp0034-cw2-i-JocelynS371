@@ -89,7 +89,7 @@ def store():
 @app.route('/data-entry', methods=['GET', 'POST'])
 @app.route('/data-entry/<index>', methods=['GET', 'POST'])
 @login_required
-def data_entry(index=None):
+def data_entry(column=None):
     try:
         if index is not None:
             data_entry = Data.query.get(index)
