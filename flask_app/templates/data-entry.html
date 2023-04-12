@@ -3,56 +3,48 @@
 
 {% block content %}
   {% if column %}
-    {% if column == 'Date' %}
-      <h1>Show data entries by {{ column }}</h1>
-      <form method="POST">
-        <label for="start">Enter start date:</label>
-        <input type="date" id="start" name="start">
-        <label for="end">Enter end date:</label>
-        <input type="date" id="end" name="end">
-        <button type="submit">Filter</button>
-      </form>
-    {% else %}
-      <h1>Show data entries by {{ column }}</h1>
-      <form method="POST">
-        <label for="start">Enter start value:</label>
-        <input type="text" id="start" name="start">
-        <label for="end">Enter end value:</label>
-        <input type="text" id="end" name="end">
-        <button type="submit">Filter</button>
-      </form>
-    {% endif %}
+      {% if column == 'Date' %}
+        <h1>Show data entries by {{ column }}</h1>
+        <form method="POST">
+          <label for="start">Enter start date:</label>
+          <input type="date" id="start" name="start">
+          <label for="end">Enter end date:</label>
+          <input type="date" id="end" name="end">
+          <button type="submit">Filter</button>
+        </form>
+      {% else %}
+        <h1>Show data entries by {{ column }}</h1>
+        <form method="POST">
+          <label for="start">Enter start value:</label>
+          <input type="text" id="start" name="start">
+          <label for="end">Enter end value:</label>
+          <input type="text" id="end" name="end">
+          <button type="submit">Filter</button>
+        </form>
+      {% endif %}
     {% if data_entries %}
-      <table>
-        <thead>
+    <table class="table table-striped table-hover">
+      <thead>
           <tr>
-            <th style="text-align:center">Index</th>
-            <th style="text-align:center">Date</th>
-            <th style="text-align:center">Temperature</th>
-            <th style="text-align:center">Salinity</th>
-            <th style="text-align:center">Density</th>
-            <th style="text-align:center">Pressure</th>
-            <th style="text-align:center">Longitude</th>
-            <th style="text-align:center">Latitude</th>
-            <th style="text-align:center">Depth</th>
+              {% for column in columns %}
+                  <th style="text-align:center">{{ column }}</th>
+              {% endfor %}
           </tr>
-        </thead>
-        <tbody>
-          {% for data_entry in data_entries %}
-            <tr>
-              <td style="text-align:center"> {{ data_entry.index }}</td>
-              <td style="text-align:center"> {{ date_to_str(data_entry.Date) }}</td>
-              <td style="text-align:center"> {{ data_entry.Temperture }}</td>
-              <td style="text-align:center"> {{ data_entry.Salinity }}</td>
-              <td style="text-align:center"> {{ data_entry.Density }}</td>
-              <td style="text-align:center"> {{ data_entry.Pressure }}</td>
-              <td style="text-align:center"> {{ data_entry.Longitude }}</td>
-              <td style="text-align:center"> {{ data_entry.Latitude }}</td>
-              <td style="text-align:center"> {{ data_entry.Depth }}</td>
-            </tr>
+      </thead>
+      <tbody>
+          {% for entry in data_entries %}
+          <tr>
+              {% for column in columns %}
+                  {% if column == 'Date' %}
+                      <td style="text-align:center">{{ date_to_str(entry[column]) }}</td>
+                  {% else %}
+                      <td style="text-align:center">{{ entry[column] }}</td>
+                  {% endif %}
+              {% endfor %}
+          </tr>
           {% endfor %}
-        </tbody>
-      </table>
+      </tbody>
+  </table>
     {% endif %}
   {% else %}
     {% if columns %}

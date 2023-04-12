@@ -34,7 +34,12 @@ def index():
 @app.route("/data-list")
 def data_list():
     data_entries = Data.query.all()
-    return render_template('data-list.html', data_entries=data_entries, date_to_str=date_to_str)
+    columns = Data.__table__.columns.keys()
+    return render_template(
+        'data-list.html',
+        columns=columns,
+        data_entries=data_entries,
+        date_to_str=date_to_str)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -92,8 +97,8 @@ def store():
 @login_required
 def data_entry(column=None):
     try:
-        if column is None:
-            columns = Data.__table__.columns.keys()
+        columns = Data.__table__.columns.keys()
+        if column is None: 
             return render_template('data-entry.html', columns=columns)
         else:
             if column not in Data.__table__.columns.keys():
@@ -109,8 +114,8 @@ def data_entry(column=None):
                     start = date_to_float(start)
                     end = date_to_float(end)
                 data_entries = Data.query.filter(getattr(Data, column).between(start, end)).all()
-                return render_template('data-entry.html', data_entries=data_entries, column=column, date_to_str=date_to_str)
-            return render_template('data-entry.html', column=column)
+                return render_template('data-entry.html', columns=columns, data_entries=data_entries, column=column, date_to_str=date_to_str)
+            return render_template('data-entry.html', columns=columns, column=column)
     except ValueError:
         return flash('The values you entered were invalid, please try again')
 

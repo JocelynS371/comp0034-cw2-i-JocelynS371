@@ -1,35 +1,30 @@
 {% extends 'layout.html' %}
-{% set title = 'Data Entries' %}
+{% set title = 'Data List' %}
 {% block content %}
-    <table>
+<div class="container">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th style="text-align:center">Entry ID</th>
-                <th style="text-align:center">Date</th>
-                <th style="text-align:center">Temperature</th>
-                <th style="text-align:center">Salinity</th>
-                <th style="text-align:center">Density</th>
-                <th style="text-align:center">Pressure</th>
-                <th style="text-align:center">Longitude</th>
-                <th style="text-align:center">Latitude</th>
-                <th style="text-align:center">Depth</th>
+                {% for column in columns %}
+                    <th style="text-align:center">{{ column }}</th>
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
             {% for entry in data_entries %}
-                <tr>
-                    <td style="text-align:center">{{ entry.index }}</td>
-                    <td style="text-align:center">{{ date_to_str(entry.Date) }}</td>
-                    <td style="text-align:center">{{ entry.Temperture }}</td>
-                    <td style="text-align:center">{{ entry.Salinity }}</td>
-                    <td style="text-align:center">{{ entry.Density }}</td>
-                    <td style="text-align:center">{{ entry.Pressure }}</td>
-                    <td style="text-align:center">{{ entry.Longitude }}</td>
-                    <td style="text-align:center">{{ entry.Latitude }}</td>
-                    <td style="text-align:center">{{ entry.Depth }}</td>
-                </tr>
+            <tr>
+                {% for column in columns %}
+                    {% if column == 'Date' %}
+                        <td style="text-align:center">{{ date_to_str(entry[column]) }}</td>
+                    {% else %}
+                        <td style="text-align:center">{{ entry[column] }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}
+
 
