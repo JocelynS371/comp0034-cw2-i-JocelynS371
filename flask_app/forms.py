@@ -7,7 +7,12 @@ class UserForm(FlaskForm):
 
     username = StringField('username', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
-    password_verif = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    password_verif = PasswordField('Confirm Password', validators=
+    [
+        DataRequired(),
+        EqualTo('password'),
+        Length(min=6, message='Password too short, must be at least %(min)d charater long')
+        ])
 
 class LoginForm(FlaskForm):
     """Form fields to input the values required to predict temperture"""

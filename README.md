@@ -11,8 +11,11 @@ To set up the app:
    following the comments in the code.
 
 
-
-# Fixing error
+# Design and Implementations
+Looking back on my design in COMP0035, my app now is very different. THis is because I designed with a REST api in mind, but made an app with ML functionality instead. However, my list of requirement is still mostly applicable
+# Must have
+There were 26 must haves in my requirement table. AMong which, 
+# Fixing errors
 ## Import Error in Testing
 When attempting to create fixtures, I encountered a ModuleNotFoundError despite having installed the necessary modules in my virtual environment. I tried various directory structures and renaming files, but the issue persisted. I eventually discovered that I had not installed the code in the Git workflow, which resolved the import error.
 ## Error in Hook Function pytest_setup_options()
