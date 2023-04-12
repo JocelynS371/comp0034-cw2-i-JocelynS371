@@ -13,8 +13,12 @@ To set up the app:
 
 # Design and Implementations
 Looking back on my design in COMP0035, my app now is very different. THis is because I designed with a REST api in mind, but made an app with ML functionality instead. However, my list of requirement is still mostly applicable
-# Must have
-There were 26 must haves in my requirement table. AMong which, 
+## Must have
+There were 26 must haves in my requirement table. AMong which, 18 were implemented, 4 were not applicable and 4 were not implemented. 
+Not all of the requirements were applicable because the requirements were desinged with an Rest api in mind.
+The ones not implemented were related to the use of flask-security and flask-email. I didn't manage to figure out in time. 
+I also attempted to create a page for letting user create a store of datas, that did not go well as that requires the database to interact.
+## Should have
 # Fixing errors
 ## Import Error in Testing
 When attempting to create fixtures, I encountered a ModuleNotFoundError despite having installed the necessary modules in my virtual environment. I tried various directory structures and renaming files, but the issue persisted. I eventually discovered that I had not installed the code in the Git workflow, which resolved the import error.
