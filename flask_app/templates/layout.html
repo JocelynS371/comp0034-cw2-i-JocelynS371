@@ -11,17 +11,17 @@
 <body>
     {% include 'navbar.html' %}
     <div class="container-fluid">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     <!-- Flashed messages see https://flask.palletsprojects.com/en/2.2.x/patterns/flashing/ -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
     </div>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>

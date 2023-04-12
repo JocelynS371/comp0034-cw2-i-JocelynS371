@@ -7,7 +7,7 @@ class Data(db.Model):
     """ data entries"""
 
     __tablename__ = 'Data'
-    index = db.Column(db.Integer(), primary_key = True)
+    id = db.Column(db.Integer(), primary_key = True)
     Temperture = db.Column(db.Float(), nullable = False)
     Salinity = db.Column(db.Float(), nullable = False)
     Density = db.Column(db.Float(), nullable = False)
@@ -28,7 +28,7 @@ class Data(db.Model):
 
 class User(UserMixin,db.Model):
     __tablename__ = 'User'
-    user_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text(), unique=True, nullable=False)
     password = db.Column(db.Text(), nullable=False)
 
@@ -39,8 +39,6 @@ class User(UserMixin,db.Model):
         if user and user.password == password:
             return user
         else: return None
-    def get_id(self):
-        return str(self.user_id)
     @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.filter(user_id == user_id).first()
+    def load_user(id):
+        return User.query.filter_by(id = id).first()

@@ -76,6 +76,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    db.session.close()
     return redirect(url_for('index'))
 
 
@@ -141,3 +142,9 @@ def predict():
             return render_template('predict.html', check=entry, prediction=prediction)
 
     return render_template('predict.html')
+
+
+@app.route("/dev-test", methods=['GET','POST'])
+def test():
+    return str(vars(current_user))
+    #return str(vars(User))

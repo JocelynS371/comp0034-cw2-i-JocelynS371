@@ -5,7 +5,7 @@ To set up the app:
 
 1. Install all dependancy in requirements.txt , using pip install -r requirement.txt
 
-2. Run flask_app\data\csv_to_sqlite.py to create the database
+2. make sure data.db is in the data folder, if not, run flask_app\data\csv_to_sqlite.py to create the database
 
 3. If the app is to be ran using a terminal, open __init__.py and swap 2 lines of code
    following the comments in the code.
