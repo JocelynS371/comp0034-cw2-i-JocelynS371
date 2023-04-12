@@ -9,6 +9,7 @@ from flask_login import login_user
     ('ADCDEFG', 'test', 'test', b'success'),
     ('abcdefg', 'test', 'test', b'success'),
     ('ADCDEFG', 'test', 'test', b'taken')
+    ('Veri','Veri','verification',b'not match')
 ])
 def test_error_register(app, test_client, username, password, password_verif, expected) :
 
@@ -26,5 +27,5 @@ def test_error_register(app, test_client, username, password, password_verif, ex
             password_verif=password_verif
         ))
         response = test_client.get('/register', content_type='html/text')
-        assert expected in response.data
+        assert expected in response.data.decode()
 

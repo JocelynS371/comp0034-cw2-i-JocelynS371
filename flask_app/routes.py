@@ -31,15 +31,6 @@ def index():
 
     return render_template('index.html')
 
-@app.route("/data-list")
-def data_list():
-    data_entries = Data.query.all()
-    columns = Data.__table__.columns.keys()
-    return render_template(
-        'data-list.html',
-        columns=columns,
-        data_entries=data_entries,
-        date_to_str=date_to_str)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -59,6 +50,7 @@ def register():
         db.session.rollback()
         flash(f'The username {username} has been taken')
         return redirect(url_for('register'))
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -87,10 +79,23 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route("/data-list")
+@login_required
+def data_list():
+    data_entries = Data.query.all()
+    columns = Data.__table__.columns.keys()
+    return render_template(
+        'data-list.html',
+        columns=columns,
+        data_entries=data_entries,
+        date_to_str=date_to_str)
+
+
 @app.route("/store")
 @login_required
 def store():
     return "placeholder"
+
 
 @app.route('/data-entry', methods=['GET', 'POST'])
 @app.route('/data-entry/<column>', methods=['GET', 'POST'])
