@@ -32,6 +32,12 @@ class User(UserMixin,db.Model):
     username = db.Column(db.Text(), unique=True, nullable=False)
     password = db.Column(db.Text(), nullable=False)
 
+    email = db.Column(db.String(255), unique=True, default=None)
+    active = db.Column(db.Boolean(), default=True)
+    confirmed_at = db.Column(db.DateTime(), default=datetime.now())
+    roles = db.relationship('Role', secondary='roles_users',
+                            back_populates="users")
+
     def __repr__(self):
         return '<User %r>' % self.username
     def check_credentials(username, password):
@@ -42,3 +48,6 @@ class User(UserMixin,db.Model):
     @login_manager.user_loader
     def load_user(id):
         return User.query.filter_by(id = id).first()
+
+
+
