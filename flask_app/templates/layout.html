@@ -9,6 +9,11 @@
 </head>
 
 <body>
+    {% include 'navbar.html' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+        {% block content %}{% endblock %}
     <!-- Flashed messages see https://flask.palletsprojects.com/en/2.2.x/patterns/flashing/ -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -19,12 +24,6 @@
     </ul>
     {% endif %}
     {% endwith %}
-
-    {% include 'navbar.html' %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-3">
-        {% block content %}{% endblock %}
     </div>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
 </body>
