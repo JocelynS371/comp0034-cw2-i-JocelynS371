@@ -9,6 +9,13 @@ PROJECT_ROOT = Path(__file__).parent
 db = SQLAlchemy()
 login_manager = LoginManager()
 
+def internal_server_error(e):
+    return render_template("error-500.html"), 500
+
+
+def page_not_found(e):
+    return render_template("error-404.html"), 404
+
 # config is not working with the terminal for unknown reason
 # if app is to be opened in terminal, 
 # swap the commented code and the previous line of code
