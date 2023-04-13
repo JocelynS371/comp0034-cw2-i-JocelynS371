@@ -10,14 +10,23 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 def internal_server_error(e):
+    """
+    Handles error when server is unresponsivw
+    """
     return render_template("error-500.html"), 500
 
 
 def page_not_found(e):
+    """
+    Handles error when a non-existent URL is entered
+    """
     return render_template("error-404.html"), 404
 
 
 def unauthorized(e):
+    """
+    Handles error when user tries to access content without login
+    """
     return render_template("error-401.html"), 401
 
 

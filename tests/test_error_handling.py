@@ -24,7 +24,9 @@ def test_error_register(app, test_client, username, password, password_verif, ex
             'password': password,
             'password_verif': password_verif
         })
-        messaged = get_flashed_messages()
-        assert expected in messaged 
+        #messaged = get_flashed_messages()
+        #assert expected in messaged 
+        response = test_client.get('/register', content_type='html/text')
+        assert expected in response.data.decode()
 
 

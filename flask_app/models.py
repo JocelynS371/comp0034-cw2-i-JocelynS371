@@ -27,6 +27,11 @@ class Data(db.Model):
     
 
 class User(UserMixin,db.Model):
+    """
+    Databse table for users
+    store username and password for logins
+    extra field to aid implementing more features in the future
+    """
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text(), unique=True, nullable=False)
@@ -43,6 +48,10 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
     def check_credentials(username, password):
+        """
+        helper function that return the right user,
+        if the password entered matches the user
+        """
         user = User.query.filter_by(username=username).first()
         if user and user.password == password:
             return user
