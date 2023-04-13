@@ -1,38 +1,38 @@
-from . import db, login_manager
 from datetime import datetime
 from flask_login import UserMixin
+from . import db, login_manager
+
 
 class Data(db.Model):
-
-    """ data entries"""
-
+    """Data entries"""
     __tablename__ = 'Data'
-    id = db.Column(db.Integer(), primary_key = True)
-    Temperture = db.Column(db.Float(), nullable = False)
-    Salinity = db.Column(db.Float(), nullable = False)
-    Density = db.Column(db.Float(), nullable = False)
-    Pressure = db.Column(db.Float(), nullable = False)
-    Date = db.Column(db.Float(), nullable = False)
-    Longitude = db.Column(db.Float(), nullable = False)
-    Latitude = db.Column(db.Float(), nullable = False)
-    Depth = db.Column(db.Float(), nullable = False)
+
+    id = db.Column(db.Integer(), primary_key=True)
+    Temperature = db.Column(db.Float(), nullable=False)
+    Salinity = db.Column(db.Float(), nullable=False)
+    Density = db.Column(db.Float(), nullable=False)
+    Pressure = db.Column(db.Float(), nullable=False)
+    Date = db.Column(db.Float(), nullable=False)
+    Longitude = db.Column(db.Float(), nullable=False)
+    Latitude = db.Column(db.Float(), nullable=False)
+    Depth = db.Column(db.Float(), nullable=False)
 
     def __repr__(self):
         """
-        Returns the attributes of an data entry as a string
+        Returns the attributes of a data entry as a string
         :returns str
         """
         clsname = self.__class__.__name__
-        return f"Entry id {self.entry_id}: {datetime.fromordinal(int(self.Date))}, {self.Longitude}, {self.Latitude}, {self.Temperture}, {self.Salinity}>"
-    
+        return f"Entry id {self.id}: {datetime.fromordinal(int(self.Date))}, {self.Longitude}, {self.Latitude}, {self.Temperature}, {self.Salinity}>"
 
-class User(UserMixin,db.Model):
+class User(UserMixin, db.Model):
     """
-    Databse table for users
-    store username and password for logins
-    extra field to aid implementing more features in the future
+    Database table for users
+    Store username and password for logins
+    Extra field to aid implementing more features in the future
     """
     __tablename__ = 'User'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text(), unique=True, nullable=False)
     password = db.Column(db.Text(), nullable=False)
@@ -47,18 +47,22 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+
     def check_credentials(username, password):
         """
-        helper function that return the right user,
+        Helper function that returns the right user,
         if the password entered matches the user
         """
         user = User.query.filter_by(username=username).first()
         if user and user.password == password:
             return user
-        else: return None
-    @login_manager.user_loader
-    def load_user(id):
-        return User.query.filter_by(id = id).first()
+        else:
+            return None
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.filter_by(id=id).first()
+
 
 
 

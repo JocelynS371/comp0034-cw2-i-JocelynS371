@@ -1,14 +1,12 @@
 from flask import current_app as app
 from flask_login import login_required, current_user, logout_user, login_user
-from flask import render_template,request, flash, redirect, url_for, jsonify
+from flask import render_template, request, flash, redirect, url_for
 from . import db
-from .models import Data,User
+from .models import Data, User
 from .functions import date_to_float, date_to_str
-from .forms import UserForm, LoginForm, PredictionForm
+from .forms import UserForm, LoginForm
 from pathlib import Path
 import pickle
-from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 
 
@@ -26,7 +24,7 @@ with open(model_salinity_file, 'rb') as f:
 
 @app.route("/")
 def index():
-    
+
     """create a homepage that allow users to login and view what they can do"""
 
     return render_template('index.html')
@@ -39,7 +37,7 @@ def register():
         if form.validate_on_submit():
             username = request.form.get('username')
             password = request.form.get('password')
-            new_user = User(username=username, password = password)
+            new_user = User(username=username, password=password)
             db.session.add(new_user)
             db.session.commit()
             text = f'Register Success, please remember your password {username}'
@@ -61,7 +59,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user=User.check_credentials(username,password)
+        user = User.check_credentials(username, password)
         if user is not None:
             flash('Logged in successfully!')
             login_user(user)
@@ -90,12 +88,6 @@ def data_list():
         columns=columns,
         data_entries=data_entries,
         date_to_str=date_to_str)
-
-
-@app.route("/store")
-@login_required
-def store():
-    return "placeholder"
 
 
 @app.route('/data-entry', methods=['GET', 'POST'])

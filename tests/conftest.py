@@ -32,7 +32,6 @@ def user(app, test_client):
         db.session.commit()
 
 
-
 @pytest.hookimpl(optionalhook=True) 
 def pytest_setup_options():
     options = Options()

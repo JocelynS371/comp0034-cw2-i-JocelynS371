@@ -1,16 +1,18 @@
 import pytest
-import flask_app
 from flask_login import login_user
+
+from flask_app import app
+
 
 @pytest.mark.parametrize('route, expected', [
     ('/', 200),
-    ('/login', 200), 
-    ('/register', 200), 
+    ('/login', 200),
+    ('/register', 200),
     ('/logout', 401),
     ('/data-list', 401),
     ('/data-entry', 401),
-    ('/predict', 401)
-    ])
+    ('/predict', 401),
+])
 def test_route_without_login(test_client, route, expected):
     """
     GIVEN a running Flask app
@@ -24,19 +26,17 @@ def test_route_without_login(test_client, route, expected):
     assert response.status_code == expected
 
 
-import pytest
-
 @pytest.mark.parametrize('route, expected', [
     ('/', 200),
-    ('/login', 200), 
+    ('/login', 200),
     ('/register', 200),
     ('/logout', 200),
-    ('/data-list', 200), 
+    ('/data-list', 200),
     ('/data-entry', 200),
     ('/predict', 200),
-    ('/ABCD', 404)
-    ])
-def test_route_with_login(app, test_client, user, route, expected):
+    ('/ABCD', 404),
+])
+def test_route_with_login(test_client, route, expected, user):
     """
     GIVEN a running Flask app
     WHEN the user registered and logged in
@@ -47,5 +47,3 @@ def test_route_with_login(app, test_client, user, route, expected):
         login_user(user)
         response = test_client.get(route)
         assert response.status_code == expected
-
-
