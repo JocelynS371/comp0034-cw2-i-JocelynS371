@@ -52,7 +52,7 @@ The template of yml is from python application.
 link to github repo:
 https://github.com/ucl-comp0035/comp0034-cw2-i-JocelynS371
 I have also done liniting which could be seen in the workflow.
-
+THe linter I used were flake8 which is included in the python application template. The warnings left on purpose are mainly in __init__ and conftest. They are import errors where the imported modules can be used if the code is to be ran in the terminal later, or imports that are left in to keep some flexibility in config. 
 
 
 
