@@ -47,6 +47,7 @@ I have chose to test if the routes are assessable and if they return the correct
 [!test] \screenshots\Screenshot_test.png   
 I have also used github for continous intergration, here is the link to the github action
 https://github.com/ucl-comp0035/comp0034-cw2-i-JocelynS371/actions
+The template of yml is from python application. 
 # Tools and technique
 link to github repo:
 https://github.com/ucl-comp0035/comp0034-cw2-i-JocelynS371
