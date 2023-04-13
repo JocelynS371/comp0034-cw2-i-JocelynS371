@@ -43,8 +43,14 @@ is entered into the terminal, the following error is returned
 Changing variable names did not resolve the error. As a workaround, two lines of code need to be swapped in __init__.py when running the app in the terminal. See the comments in __init__.py for more details.
 
 # Testing
-I have chose to test if the routes are assessable and if they return the correct status code. When I tried to test the route while logged in, it just doesn't work. 
-
+I have chose to test if the routes are assessable and if they return the correct status code. When I tried to test the route while logged in, it just doesn't work. Here is the screenshot to the tests   
+[!test] \screenshots\Screenshot_test.png   
+I have also used github for continous intergration, here is the link to the github action
+https://github.com/ucl-comp0035/comp0034-cw2-i-JocelynS371/actions
+# Tools and technique
+link to github repo:
+https://github.com/ucl-comp0035/comp0034-cw2-i-JocelynS371
+I have also done liniting which could be seen in the workflow.
 
 
 
