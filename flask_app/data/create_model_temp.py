@@ -8,29 +8,28 @@ from sklearn.metrics import r2_score,mean_absolute_error
 from sklearn.ensemble import GradientBoostingRegressor
 
 
-plot=False
-optimise=False
+plot = False
+optimise = False
 
 
 # Load the data from the CSV file into a pandas DataFrame
-def read_df(): 
+def read_df():
 
     """return a renamed dataframe"""
 
     data_path = 'flask_app\data\data_set_prepared.csv'
     df = pd.read_csv(data_path)
-    df.rename(columns = {
-        'Potential_temperature_C':'Temperture',
-        'Practical_salinity':'Salinity',
-        'Potential_density_anomaly_kgm3':'Density',
-        'Pressure_decibar':'Pressure',
-        'Serial_date_number_base_date_1_January_0000':'Date',
-        'Bottom_Depth_m':'Bottom Depth'
+    df.rename(columns={
+        'Potential_temperature_C': 'Temperture',
+        'Practical_salinity': 'Salinity',
+        'Potential_density_anomaly_kgm3': 'Density',
+        'Pressure_decibar': 'Pressure',
+        'Serial_date_number_base_date_1_January_0000': 'Date',
+        'Bottom_Depth_m': 'Bottom Depth'
         },inplace=True)
-    #df['Date'] = [datetime.fromordinal(int(date)) for date in df['Date']]
     return df
 
-data=read_df()
+data = read_df()
 # extract the features and target variable
 X = data[['Date', 'Longitude', 'Latitude']]
 y = data['Temperture']

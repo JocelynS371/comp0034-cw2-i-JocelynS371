@@ -34,8 +34,9 @@ def unauthorized(e):
 # config is not working with the terminal for unknown reason
 # if app is to be opened in terminal,
 # swap the commented code and the previous line of code
+# def create_app():
 def create_app(config_class):
-# def create_app(): 
+
     """Create and configure the Flask app"""
 
     app = Flask(__name__)
