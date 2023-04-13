@@ -1,8 +1,9 @@
-from flask import current_app as app
+
 from pathlib import Path
 
 """Flask config class."""
 PROJECT_ROOT = Path(__file__).parent
+
 
 class Config(object):
     """
@@ -10,8 +11,8 @@ class Config(object):
     """
     SECRET_KEY = "saULPgD9XU8vzLVk7kyLBw"
     TESTING = False
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
-    SQLALCHEMY_ECHO=True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = True
     WTF_CSRF_ENABLED = True
 
 
@@ -26,8 +27,8 @@ class DevelopmentConfig(Config):
     """
     development config, use local database
     """
-    SQLALCHEMY_DATABASE_URI="sqlite:///" + str(
-    PROJECT_ROOT.joinpath("data", "data.db"))
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + str(
+        PROJECT_ROOT.joinpath("data", "data.db"))
 
 
 class TestingConfig(Config):
@@ -37,4 +38,3 @@ class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     WTF_CSRF_ENABLED = False
-
