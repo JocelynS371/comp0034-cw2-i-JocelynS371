@@ -35,8 +35,6 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255), unique=True, default=None)
     active = db.Column(db.Boolean(), default=True)
     confirmed_at = db.Column(db.DateTime(), default=datetime.now())
-    roles = db.relationship('Role', secondary='roles_users',
-                            back_populates="users")
 
     def __init__(self, username, password):
         self.username = username
