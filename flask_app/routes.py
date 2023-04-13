@@ -96,7 +96,7 @@ def data_list():
 def data_entry(column=None):
     try:
         columns = Data.__table__.columns.keys()
-        if column is None: 
+        if column is None:
             return render_template('data-entry.html', columns=columns)
         else:
             if column not in Data.__table__.columns.keys():
@@ -108,11 +108,17 @@ def data_entry(column=None):
                 if start > end:
                     flash('Invalid range')
                     return redirect(url_for('data_entry', column=column))
-                elif column == 'Date' :
+                elif column == 'Date':
                     start = date_to_float(start)
                     end = date_to_float(end)
                 data_entries = Data.query.filter(getattr(Data, column).between(start, end)).all()
-                return render_template('data-entry.html', columns=columns, data_entries=data_entries, column=column, date_to_str=date_to_str)
+                return render_template(
+                    'data-entry.html', 
+                    columns=columns,
+                    data_entries=data_entries,
+                    column=column,
+                    date_to_str=date_to_str
+                    )
             return render_template('data-entry.html', columns=columns, column=column)
     except ValueError:
         return flash('The values you entered were invalid, please try again')
@@ -125,7 +131,7 @@ def predict():
             date = date_to_float(request.form['date'])
             longitude = request.form['longitude']
             latitude = request.form['latitude']
-            entry=[request.form['date'],longitude,latitude]
+            entry=[request.form['date'], longitude, latitude]
             # perform prediction
             prediction={}
             prediction['Temperature'] = model_temp.predict([[date, longitude, latitude]])[0]
@@ -139,4 +145,4 @@ def predict():
 @app.route("/dev-test", methods=['GET','POST'])
 def test():
     return str(vars(current_user))
-    #return str(vars(User))
+    # return str(vars(User))

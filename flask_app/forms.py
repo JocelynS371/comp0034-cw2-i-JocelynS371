@@ -30,6 +30,3 @@ class PredictionForm(FlaskForm):
     date = DecimalField(validators=[DataRequired()])
     longitude = FloatField(validators=[DataRequired()])
     latitude = FloatField(validators=[DataRequired()])
-
-    
-    

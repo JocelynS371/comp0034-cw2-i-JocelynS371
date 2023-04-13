@@ -22,8 +22,8 @@ class Data(db.Model):
         Returns the attributes of a data entry as a string
         :returns str
         """
-        clsname = self.__class__.__name__
-        return f"Entry id {self.id}: {datetime.fromordinal(int(self.Date))}, {self.Longitude}, {self.Latitude}, {self.Temperature}, {self.Salinity}>"
+        return f"Entry id {self.id}" 
+
 
 class User(UserMixin, db.Model):
     """
@@ -59,10 +59,7 @@ class User(UserMixin, db.Model):
         else:
             return None
 
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.filter_by(id=id).first()
-
-
-
-
