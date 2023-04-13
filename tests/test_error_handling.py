@@ -1,7 +1,8 @@
 import pytest
 import flask_app
 from flask_login import login_user
-from flask import get_flashed_messages
+# from flask import get_flashed_messages
+
 
 @pytest.mark.parametrize('username, password, password_verif, expected', [
     ('test', 'test', 'test', 'success'),
@@ -9,11 +10,11 @@ from flask import get_flashed_messages
     ('ADCDEFG', 'test', 'test', 'success'),
     ('abcdefg', 'test', 'test', 'success'),
     ('ADCDEFG', 'test', 'test', 'taken'),
-    ('Veri','Veri','verification','not match')
+    ('Veri', 'Veri', 'verification', 'not match')
 ])
 def test_error_register(app, test_client, username, password, password_verif, expected):
     """ GIVEN register is functional
-        WHEN username is not unique 
+        WHEN username is not unique
         THEN return error message that the username is not unique
         WHEN the password verification does not match
         THEN return error message that the password does not match """
@@ -24,9 +25,7 @@ def test_error_register(app, test_client, username, password, password_verif, ex
             'password': password,
             'password_verif': password_verif
         })
-        #messaged = get_flashed_messages()
-        #assert expected in messaged 
+        # messaged = get_flashed_messages()
+        # assert expected in messaged
         response = test_client.get('/register', content_type='html/text')
         assert expected in response.data.decode()
-
-
