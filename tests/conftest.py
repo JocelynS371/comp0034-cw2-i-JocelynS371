@@ -24,8 +24,13 @@ def test_client(app):
 @pytest.fixture(scope="function")
 def user(app, test_client):
     with app.app_context():
-        user=User('password','password')
+        user = User(username='test', password='password')
+        db.session.add(user)
+        db.session.commit()
         yield user
+        db.session.delete(user)
+        db.session.commit()
+
 
 
 @pytest.hookimpl(optionalhook=True) 
