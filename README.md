@@ -44,7 +44,7 @@ Changing variable names did not resolve the error. As a workaround, two lines of
 
 # Testing
 I have chose to test if the routes are assessable and if they return the correct status code. When I tried to test the route while logged in, it just doesn't work. Here is the screenshot to the tests   
-[!test] /screenshots/Screenshot_test.png   
+![test](/screenshots/Screenshot_test.png)
 I have also used github for continous intergration, here is the link to the github action
 https://github.com/ucl-comp0035/comp0034-cw2-i-JocelynS371/actions
 The template of yml is from python application. 
