@@ -1,8 +1,7 @@
 import pytest
-from flask import current_app as app
-from flask_app.models import Data, User
+from flask_app.models import User
 from flask_app import create_app, db
-from flask_app.config import Config, ProductionConfig, DevelopmentConfig, TestingConfig
+from flask_app.config import ProductionConfig, DevelopmentConfig, TestingConfig
 from selenium.webdriver.chrome.options import Options
 
 

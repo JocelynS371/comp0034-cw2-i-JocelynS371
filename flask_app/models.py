@@ -22,7 +22,7 @@ class Data(db.Model):
         Returns the attributes of a data entry as a string
         :returns str
         """
-        return f"Entry id {self.id}" 
+        return f"Entry id {self.id}"
 
 
 class User(UserMixin, db.Model):

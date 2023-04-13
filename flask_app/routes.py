@@ -113,7 +113,7 @@ def data_entry(column=None):
                     end = date_to_float(end)
                 data_entries = Data.query.filter(getattr(Data, column).between(start, end)).all()
                 return render_template(
-                    'data-entry.html', 
+                    'data-entry.html',
                     columns=columns,
                     data_entries=data_entries,
                     column=column,
@@ -124,25 +124,24 @@ def data_entry(column=None):
         return flash('The values you entered were invalid, please try again')
 
 
-@app.route("/predict", methods=['GET','POST'])
+@app.route("/predict", methods=['GET', 'POST'])
 @login_required
 def predict():
     if request.method == 'POST':
-            date = date_to_float(request.form['date'])
-            longitude = request.form['longitude']
-            latitude = request.form['latitude']
-            entry=[request.form['date'], longitude, latitude]
-            # perform prediction
-            prediction={}
-            prediction['Temperature'] = model_temp.predict([[date, longitude, latitude]])[0]
-            prediction['Salinity'] = model_salinity.predict([[date, longitude, latitude]])[0]
-            # render the prediction result in the same page
-            return render_template('predict.html', check=entry, prediction=prediction)
-
+        date = date_to_float(request.form['date'])
+        longitude = request.form['longitude']
+        latitude = request.form['latitude']
+        entry = [request.form['date'], longitude, latitude]
+        # perform prediction
+        prediction = {}
+        prediction['Temperature'] = model_temp.predict([[date, longitude, latitude]])[0]
+        prediction['Salinity'] = model_salinity.predict([[date, longitude, latitude]])[0]
+        # render the prediction result in the same page
+        return render_template('predict.html', check=entry, prediction=prediction)
     return render_template('predict.html')
 
 
-@app.route("/dev-test", methods=['GET','POST'])
+@app.route("/dev-test", methods=['GET', 'POST'])
 def test():
     return str(vars(current_user))
     # return str(vars(User))
