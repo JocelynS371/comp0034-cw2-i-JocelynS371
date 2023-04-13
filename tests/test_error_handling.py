@@ -8,7 +8,7 @@ from flask_login import login_user
     ('test', 'test', 'test', b'taken'),
     ('ADCDEFG', 'test', 'test', b'success'),
     ('abcdefg', 'test', 'test', b'success'),
-    ('ADCDEFG', 'test', 'test', b'taken')
+    ('ADCDEFG', 'test', 'test', b'taken'),
     ('Veri','Veri','verification',b'not match')
 ])
 def test_error_register(app, test_client, username, password, password_verif, expected) :
