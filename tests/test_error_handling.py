@@ -4,12 +4,12 @@ from flask_login import login_user
 
 @pytest.mark.parametrize('username, password, password_verif, expected',
 [
-    ('test', 'test', 'test', b'success'),
-    ('test', 'test', 'test', b'taken'),
-    ('ADCDEFG', 'test', 'test', b'success'),
-    ('abcdefg', 'test', 'test', b'success'),
-    ('ADCDEFG', 'test', 'test', b'taken'),
-    ('Veri','Veri','verification',b'not match')
+    ('test', 'test', 'test', 'success'),
+    ('test', 'test', 'test', 'taken'),
+    ('ADCDEFG', 'test', 'test', 'success'),
+    ('abcdefg', 'test', 'test', 'success'),
+    ('ADCDEFG', 'test', 'test', 'taken'),
+    ('Veri','Veri','verification','not match')
 ])
 def test_error_register(app, test_client, username, password, password_verif, expected) :
 

@@ -33,7 +33,8 @@ import pytest
     ('/logout', 200),
     ('/data-list', 200), 
     ('/data-entry', 200),
-    ('/predict', 200)
+    ('/predict', 200),
+    ('/ABCD', 404)
     ])
 def test_route_with_login(app, test_client, user, route, expected):
     """
