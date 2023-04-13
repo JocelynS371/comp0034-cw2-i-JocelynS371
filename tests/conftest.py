@@ -24,12 +24,8 @@ def test_client(app):
 @pytest.fixture(scope="function")
 def user(app, test_client):
     with app.app_context():
-        with app.test_request_context():
-            test_client.post('/register', data=dict(username='dummy', password='dummy'))
-            user = User.query.filter_by(username='dummy').first()
-            yield user
-            db.session.delete(user)
-            db.session.commit()
+        user=User('password','password')
+        yield user
 
 
 @pytest.hookimpl(optionalhook=True) 

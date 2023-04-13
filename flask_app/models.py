@@ -38,6 +38,10 @@ class User(UserMixin,db.Model):
     roles = db.relationship('Role', secondary='roles_users',
                             back_populates="users")
 
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
     def __repr__(self):
         return '<User %r>' % self.username
     def check_credentials(username, password):

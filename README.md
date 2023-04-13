@@ -13,11 +13,13 @@ To set up the app:
 
 # Design and Implementations
 Looking back on my design in COMP0035, my app now is very different. THis is because I designed with a REST api in mind, but made an app with ML functionality instead. However, my list of requirement is still mostly applicable
-## Must have
+## Requirements
 There were 26 must haves in my requirement table. AMong which, 18 were implemented, 4 were not applicable and 4 were not implemented. 
 Not all of the requirements were applicable because the requirements were desinged with an Rest api in mind.
-The ones not implemented were related to the use of flask-security and flask-email. I didn't manage to figure out in time. 
+The ones not implemented were related to the use of flask-security and flask-email. Although I have tried using them, it created a bug that I couldn't fix and therefore were aborted.
 I also attempted to create a page for letting user create a store of datas, that did not go well as that requires the database to interact.
+## URL designs
+In general, the way I have implemented by routes were very different to the design. In the design, I had 3 main route, /store, /data-entry and /compare. Only data entry were kept. I have also planned to mainly use put method but ended up using post method instead. The orginal consideration is based on the idempotency of the put method. However, in this coursework, I choose to mainly use the post method as not all resource have a pre-defined URL. Most are created by passing a query to an html template. If I were to continue developing a REST api, I would have utilised the put method more.
 ## Should have
 # Fixing errors
 ## Import Error in Testing
@@ -39,6 +41,10 @@ There is a slight error with the config. While it is fine in cintinous intergrat
 is entered into the terminal, the following error is returned   
 `Error: Failed to parse arguments as literal values: 'create_app(config.DevelopmentConfig)'.   `   
 Changing variable names did not resolve the error. As a workaround, two lines of code need to be swapped in __init__.py when running the app in the terminal. See the comments in __init__.py for more details.
+
+# Testing
+I have chose to test if the routes are assessable and if they return the correct status code. When I tried to test the route while logged in, it just doesn't work. 
+
 
 
 
