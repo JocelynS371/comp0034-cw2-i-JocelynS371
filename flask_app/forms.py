@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import DecimalField, StringField, FloatField, PasswordField
-from wtforms.validators import DataRequired, EqualTo
+from wtforms.validators import DataRequired, EqualTo, Length
 
 class UserForm(FlaskForm):
     """Form fields to input the values required to predict temperture"""
